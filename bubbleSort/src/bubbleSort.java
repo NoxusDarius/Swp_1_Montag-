@@ -56,11 +56,14 @@ public class bubbleSort {
 
         int auswahlgröße = größen2();
         int auswahlGrenze = größen();
-        final long timeStart = System.nanoTime();
+
         int[] arr= rdarray(auswahlGrenze,auswahlgröße);
-        final long timeEnd = System.nanoTime();
-        System.out.println("Es wurden: " + (timeEnd-timeStart) + " Nanosekunden gemessen");
+
+
+        final long timeStart = System.currentTimeMillis();
         bubbleSort(arr);
+        final long timeEnd = System.currentTimeMillis();
+        System.out.print("Es wurden: " + (timeEnd-timeStart) + " Millisec gemessen");
 
 
         }
