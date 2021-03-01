@@ -2,6 +2,9 @@
 public class muteablevsimmuteable {
 
     public static void main(String[] args) {
+
+
+        //immutable objects or variables cant be changed mutable canss
         // Strings in java are always immutable
         // in other languages like c+ a string can be mutable and you can mordify him directly
         String first = "first";
