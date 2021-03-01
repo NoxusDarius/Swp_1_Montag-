@@ -40,6 +40,7 @@ public class muteablevsimmuteable {
         // The second Line will be created in the string pooled area
         // if we again write a str = new String("very") then it will create a new object with the value "very" rather then pointing to the available object in heap area with the same value. But if
         // we write str="very" then it will pont to String constant object with value "very" present in String pooled area
-
+            //primitive Datentypen sind keine Objecte
+        // Also alles was klein is keine OBjecte alles was groß ist objecte
     }
 }
