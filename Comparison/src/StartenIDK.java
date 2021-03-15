@@ -32,17 +32,17 @@ public class StartenIDK {
         for (int i = 0; i<anzahlArrays;i++) {
 
 
-            int[] arr = lottozahlen();
+
            // System.out.println(java.util.Arrays.toString(arr));
-            werteBS = bs.bubbleSort(arr);
+            werteBS = bs.bubbleSort(lottozahlen());
             schrittWerteBS[i] = werteBS[0];
             vertauschWerteBS[i] = werteBS[1];
 
-            werteSSS = sss.stableSelectionSort(arr,größeArray);
+            werteSSS = sss.stableSelectionSort(lottozahlen(),größeArray);
             schrittWerteSSS[i] = werteSSS[0];
             vertauschWerteSSS[i] = werteSSS[1];
 
-            werteSS = ss.sort(arr);
+            werteSS = ss.sort(lottozahlen());
             schrittWerteSS[i] = werteSS[0];
             vertauschWerteSS[i] = werteSS[1];
         }
