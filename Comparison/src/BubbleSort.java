@@ -21,36 +21,18 @@ public class BubbleSort {
                 }
             }
         }
-      /*  System.out.println(" ");
-        System.out.println("Vertauschoperationen:" + vertauschoperationen);
-        System.out.println(" ");
 
-        System.out.println("Schritte:"+anzahlSchritte);
-        System.out.println(" ");
-        System.out.println("Array After Bubble Sort");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }*/
         int endtime = (int) System.nanoTime();
         int[] countWerte = new int[3];
         countWerte[1] = vertauschoperationen;
         countWerte[0] = anzahlSchritte;
-     //   long[] time =new long[1];
-        System.out.println(endtime + "Endtime");
-        System.out.println(startTime + "Startime");
+
+
         bubblesortZeit.add(endtime-startTime);
 
         return countWerte;
 
 
     }
-   /* public static void main(String[] args) {
 
-        int arr[] = {1,2,3,4,5};
-
-        System.out.println("Sorted array");
-        bubbleSort(arr);
-
-
-    }*/
 }

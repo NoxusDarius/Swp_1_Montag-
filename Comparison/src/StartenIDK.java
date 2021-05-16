@@ -5,8 +5,10 @@ public class StartenIDK {
    static int größeArray;
    static int zahlenbereich;
    static int anzahlArrays;
-   static long[] zeiten = new long[4];
-    private static int partition;
+   static ArrayList<Long> schritteListQS = new ArrayList<>();
+   static ArrayList<Long> vertauschListeQS = new ArrayList<>();
+   static ArrayList<Long> quicksortZeit = new ArrayList<>();
+
 
     public static void main(String[] args) {
 
@@ -18,7 +20,6 @@ public class StartenIDK {
         ArrayList<Long> insertionsortZeit = new ArrayList<>();
         ArrayList<Long> selectionsortstableZeit = new ArrayList<>();
         ArrayList<Long> selectionsortZeit = new ArrayList<>();
-        ArrayList<Long> QuicksortZeit = new ArrayList<>();
         int[] schrittWerteSSS = new int[anzahlArrays];
         int[] vertauschWerteSSS = new int[anzahlArrays];
         int[] werteSSS ;
@@ -28,20 +29,11 @@ public class StartenIDK {
         int[] schrittWerteIS = new int[anzahlArrays];
         int[] vertauschWerteIS = new int[anzahlArrays];
         int[] werteIS;
-        int[] schrittWerteQS = new int[anzahlArrays];
-        int[] vertauschWerteQS = new int[anzahlArrays];
-        int[] werteQS;
-        int median = (größeArray/2)-1;
-
-
-
-
+        int median = (anzahlArrays/2)-1;
 
         for (int i = 0; i<anzahlArrays;i++) {
 
-
             int[] arr = lottozahlen();
-
 
             werteBS = BubbleSort.bubbleSort(arr);
             schrittWerteBS[i] = werteBS[0];
@@ -49,38 +41,28 @@ public class StartenIDK {
             bubblesortZeit.add(BubbleSort.bubblesortZeit.get(i));
 
             arr = lottozahlen();
-
             werteSSS = SelectionSortStable.stableSelectionSort(arr,größeArray);
             schrittWerteSSS[i] = werteSSS[0];
             vertauschWerteSSS[i] = werteSSS[1];
             selectionsortstableZeit.add(SelectionSortStable.Zeit.get(i));
-            arr = lottozahlen();
 
+            arr = lottozahlen();
             werteSS = SelectionSort.sort(arr);
             schrittWerteSS[i] = werteSS[0];
             vertauschWerteSS[i] = werteSS[1];
             selectionsortZeit.add(SelectionSort.bubblesortZeit.get(i));
-
-
 
             arr = lottozahlen();
             werteIS = InsertionSort.sort(arr);
             schrittWerteIS[i]= werteIS[0];
             vertauschWerteIS[i]=werteIS[1];
             insertionsortZeit.add(InsertionSort.bubblesortZeit.get(i));
+
             arr = lottozahlen();
+            quickSort(arr,0,arr.length-1);
 
-            QuickSort.partition(arr,0,arr.length-1);
-
-
-            schrittWerteIS[i]= werteIS[0];
-            vertauschWerteIS[i]=werteIS[1];
-            insertionsortZeit.add(InsertionSort.bubblesortZeit.get(i));
         }
-      //  Arrays.toString(vertauschWerteSSS);
-       // System.out.println(Arrays.toString(vertauschWerteSSS));
-        System.out.println(bubblesortZeit);
-        System.out.println(insertionsortZeit);
+
         Arrays.sort(schrittWerteBS);
         Arrays.sort(vertauschWerteBS);
         Arrays.sort(schrittWerteSSS);
@@ -89,7 +71,6 @@ public class StartenIDK {
         Arrays.sort(vertauschWerteSS);
         Arrays.sort(schrittWerteIS);
         Arrays.sort(vertauschWerteIS);
-        System.out.println(bubblesortZeit);
         System.out.println("Comparison der Verschiedenen Sorts");
         System.out.println(median);
         System.out.println("Bubble Sort");
@@ -97,37 +78,32 @@ public class StartenIDK {
         System.out.println("Median Vertauschschritte: "+vertauschWerteBS[median]);
         System.out.println("Durchschnitt Vergleichsschritte: "+avg(schrittWerteBS));
         System.out.println("Durchschnitt Vertauschschritte: "+avg(vertauschWerteBS));
-        System.out.println("Durchschnitt Zeit: "+avgList(bubblesortZeit,0) + "Nanosekunden");
+        System.out.println("Durchschnitt Zeit: "+avgList(bubblesortZeit) + "Nanosekunden");
         System.out.println("Selection Sort Stable");
         System.out.println("Median Vergleichsschritte: "+schrittWerteSSS[median]);
         System.out.println("Median Vertauschschritte: "+vertauschWerteSSS[median]);
         System.out.println("Durchschnitt Vergleichsschritte: "+avg(schrittWerteSSS));
         System.out.println("Durchschnitt Vertauschschritte: "+ avg(vertauschWerteSSS));
-        System.out.println("Durchschnitt Zeit: "+avgList(selectionsortstableZeit,1) + "Nanosekunden");
+        System.out.println("Durchschnitt Zeit: "+avgList(selectionsortstableZeit) + "Nanosekunden");
         //System.out.println("Durchschnitt Zeit" +avgList(selectionsortZeit));
         System.out.println("Selection Sort");
         System.out.println("Median Vergleichsschritte: "+schrittWerteSS[median]);
         System.out.println("Median Vertauschschritte: "+vertauschWerteSS[median]);
         System.out.println("Durchschnitt Vergleichsschritte: "+avg(schrittWerteSS));
         System.out.println("Durchschnitt Vertauschschritte: "+ avg(vertauschWerteSS));
-        System.out.println("Durchschnitt Zeit: "+avgList(selectionsortZeit,2) + "Nanosekunden");
+        System.out.println("Durchschnitt Zeit: "+avgList(selectionsortZeit) + "Nanosekunden");
         System.out.println("Insertion Sort");
         System.out.println("Median Vergleichsschritte: "+schrittWerteIS[median]);
         System.out.println("Median Vertauschschritte: "+vertauschWerteIS[median]);
         System.out.println("Durchschnitt Vergleichsschritte: "+avg(schrittWerteIS));
         System.out.println("Durchschnitt Vertauschschritte: "+ avg(vertauschWerteIS));
-        System.out.println("Durchschnitt Zeit: "+avgList(insertionsortZeit,3) + "Nanosekunden");
-        System.out.println("Zeiten:"+ Arrays.toString(zeiten));
-        System.out.println(Arrays.stream(zeiten).max());
-
-
-
-
-
-
-
-
-
+        System.out.println("Durchschnitt Zeit: "+avgList(insertionsortZeit) + "Nanosekunden");
+        System.out.println("Quick Sort");
+        System.out.println("Median Vergleichsschritte: "+schritteListQS.get(median));
+        System.out.println("Median Vertauschschritte: "+vertauschListeQS.get(median));
+        System.out.println("Durchschnitt Vergleichsschritte: "+avgList(schritteListQS));
+        System.out.println("Durchschnitt Vertauschschritte: "+ avgList(vertauschListeQS));
+        System.out.println("Durchschnitt Zeit: "+avgList(quicksortZeit) + "Nanosekunden");
     }
     static long avg(int[] array){
         long temp = 0, avg;
@@ -138,13 +114,13 @@ public class StartenIDK {
 
         return avg;
     }
-    static long avgList(ArrayList<Long> List,int zahl){
+    static long avgList(ArrayList<Long> List){
         long temp = 0, avgList;
         for (Long aLong : List) {
             temp += aLong;
         }
         avgList = temp/List.size();
-        zeiten[zahl] = avgList;
+
         return avgList;
     }
     static int[] lottozahlen() {
@@ -200,5 +176,53 @@ public class StartenIDK {
             else{
                 System.out.println("Es muss ein wert über 0 eingegeben werden");
             }
+    }
+    static void swap(int[] arr, int i, int j)
+    {   long tauschenQS=0;
+
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        tauschenQS++;
+        vertauschListeQS.add(tauschenQS);
+    }
+
+    static int partition(int[] arr, int low, int high)
+    {
+        long schritteQS=0;
+
+        int pivot = arr[high];
+
+        int i = (low - 1);
+
+        for(int j = low; j <= high - 1; j++)
+        {
+            if (arr[j] < pivot)
+            {
+
+                i++;
+                swap(arr, i, j);
+                schritteQS++;
+
+            }
+        }
+        swap(arr, i + 1, high);
+
+        schritteListQS.add(schritteQS);
+        return (i + 1);
+    }
+
+
+    static void quickSort(int[] arr, int low, int high)
+    {   long startTime = (int) System.nanoTime();
+        if (low < high)
+        {
+            int pi = partition(arr, low, high);
+
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+            int endtime = (int) System.nanoTime();
+            quicksortZeit.add(endtime-startTime);
+        }
     }
 }
